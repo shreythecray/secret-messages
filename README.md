@@ -16,6 +16,8 @@ We are hosting our first hackathon next month, starting September 5th until Sept
 
 Register for the Hackathon: [https://jkfr7wbzytt.typeform.com/courier-hacks](https://jkfr7wbzytt.typeform.com/courier-hacks)
 
+Courier's Get Started with Node.js: [https://www.courier.com/docs/guides/getting-started/nodejs/](https://www.courier.com/docs/guides/getting-started/nodejs/)
+
 Courier Send API Docs: [https://www.courier.com/docs/reference/send/message/](https://www.courier.com/docs/reference/send/message/)
 
 Twilio Messaging Service SID Docs: [https://support.twilio.com/hc/en-us/articles/223181308-Getting-started-with-Messaging-Services](https://support.twilio.com/hc/en-us/articles/223181308-Getting-started-with-Messaging-Services)
@@ -30,7 +32,7 @@ Fun Translations API: [https://api.funtranslations.com/](https://api.funtranslat
 
 # Instructions
 
-**Chapter 1: Setting up**
+### Chapter 1: Setting up
 
 In this first Chapter, we will need to authorize our API to send the secret messages. Let’s get started by integrating the Gmail and Twilio APIs, which will enable Courier to send emails and messages from a single API call.
 
@@ -47,41 +49,185 @@ You lastly just need to locate the Messaging Service SID, which can be created i
 
 6. Once we have all three pieces of information, install the provider and now your Courier account is authorized to send any email or SMS within one API call.
 
-**Chapter 2: sending messages**
+### Chapter 2: Sending Messages
 
-In this next Chapter, we will start sending messages.
+In this next Chapter, you will start sending messages. To actually send the secret messages, head over to the [Send API documentation](https://www.courier.com/docs/reference/send/message/). Here you can find everything related to sending messages.
 
-To actually send the secret messages, we’re going to head over to the Send API documentation. You can access the Docs from [courier.com](http://courier.com), and locate the specific page under API Reference.
+On the right, you will see some starter code and can select a language of your choice from cURL, Node.js, Ruby, Python, Go, or PHP. 
 
-Here we can find everything related to sending messages.
+7. Select Node.js to get started.
 
-On the right, we can see some starter code and can select a language of our choice from cURL, Node.js, Ruby, Python, Go, or PHP. We are going to use Node.js on this mission.
+```javascript
+// Dependencies to install:
+// $ npm install node-fetch --save
 
-This is a basic POST request that can be edited to include our spies’ data such as how to contact them and the message we need to send. The “Notification Template” needs to be replaced with our own template.
+const fetch = require('node-fetch');
 
-We can’t share our spies’ real contact information, so for this video we will use some fake data. We can add an email address in the email field on the left, which you will notice automatically appears in the code snippet on the right.
+const options = {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    "message": {
+      "template": "NOTIFICATION_TEMPLATE"
+    }
+  })
+};
 
-Next we need to add the actual message we are sending. Our messages are going to be pretty simple, so we can directly write them into the API call instead of creating a template.
+fetch('https://api.courier.com/send', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+```
 
-The title refers to an email’s subject. We’ll write in “new subject” temporarily and change it later. In the email body, we’ll just write “message” for now.
+This is a basic POST request that can be edited to include the spies’ data such as how to contact them and the message you need to send. The “Notification Template” can to be replaced with your own template.
 
-Just as before, the data on the left automatically appeared in the code snippet on the right. We can see there is a content object that encompasses the title and body parameters.
+8. Add an email address in the email field on the left, which you will notice automatically appears in the code snippet on the right.
 
-Now we just need to make sure that this API call has access to our Courier account, which is linked to the Gmail and Twilio APIs, so we can replace the Auth Token. We can find the Courier auth token stores safely in our account in settings, under API Keys. 
+```javascript
+// Dependencies to install:
+// $ npm install node-fetch --save
 
-We can send this code out from here to test that the API call works. Within our Courier logs we can see that 3 seconds ago, we sent a message and this is how it rendered for the user receiving the message.
+const fetch = require('node-fetch');
 
-Now we can integrate this code into our own Node.js application. Let’s open VS Code and open a new project with a file called index.js.
+const options = {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    "message": {
+      "template": "NOTIFICATION_TEMPLATE",
+      "to": {
+        "email": "courier.demos@gmail.com"
+      }
+    }
+  })
+};
 
-Once we have pasted our code in, we can see that we do need to install the node-fetch npm package, which will enable us to make API calls. Open a terminal and paste the command to install the package.
+fetch('https://api.courier.com/send', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+```
 
-Once your code is ready, we can try running our program for the first time.
+Next you need to add the actual message you are sending. These messages are pretty simple, so you can directly write them into the API call instead of creating a template.
 
-Here we run into our first error, which is caused by the require statement on line 4. To fix this, we can check out the node-fetch documentation, which tells us to install a different version of the package. This allows us to continue.
+9. Write in a subject in the title object (this can be changed anytime).
+10.  In the email body, write your message.
 
-Now when we run this program, we get a response from Courier that includes the requestID. This indicates that the API call was made successfully and we can head over to the Courier datalog to determine if the message was sent successfully as well, which it was.
+```javascript
+// Dependencies to install:
+// $ npm install node-fetch --save
 
-Since we are Secret Agents, we should probably protect the API key in case our code gets in the wrong hands. We can do this by storing the Key in a .env file and installing the dotenv npm package, which will allow us to access it as a variable in our index.js file. Once the package is installed, we can access the key by referring to it as process.env.APIKEY. We also need to ensure that we have required the npm package in this file specifically after installing it.
+const fetch = require('node-fetch');
+
+const options = {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    "message": {
+      "to": {
+        "email": "courier.demos@gmail.com"
+      },
+      "content": {
+        "title": "new subject",
+        "body": "message"
+      }
+    }
+  })
+};
+
+fetch('https://api.courier.com/send', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+```
+
+Just as before, the data on the left automatically appears in the code snippet on the right. There is a content object that encompasses the title and body parameters.
+
+Now you just need to make sure that this API call has access to your Courier account, which is linked to the Gmail and Twilio APIs
+
+11.  Replace the Auth Token with the Courier API Key (stored in Courier account settings under API Keys)[https://www.courier.com/docs/guides/getting-started/nodejs/#getting-your-api-keys].
+
+```javascript
+// Dependencies to install:
+// $ npm install node-fetch --save
+
+const fetch = require('node-fetch');
+
+const options = {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer apikey'
+  },
+  body: JSON.stringify({
+    "message": {
+      "to": {
+        "email": "courier.demos@gmail.com"
+      },
+      "content": {
+        "title": "new subject",
+        "body": "message"
+      }
+    }
+  })
+};
+
+fetch('https://api.courier.com/send', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+```
+
+12.  Send this code out from here to test that the API call works (click "Try it" above the code snippet).
+13.  Go to your [Courier logs](https://app.courier.com/logs/messages) and click on the latest log for more information. You should be able to view how it rendered for the user receiving the message. If there was an error, you should be able to access an error code there as well.
+
+Now you can integrate this code into our own Node.js application.
+
+14. Open VS Code and open a new project with a file called `index.js`.
+15. Past the code into the `index.js` file
+16. Install the node-fetch npm package, which will enable you to make API calls.
+17. Open a terminal and paste the command to install the package.
+
+```shell
+$ npm install node-fetch --save
+```
+
+18. Run the program in terminal
+
+```shell
+$ node index.js
+```
+
+19. Here you may run into an error with node-fetch, which is caused by the require statement on line 4. To fix this, install a different version of the package found on the node-fetch documentation: [https://www.npmjs.com/package/node-fetch#class-response](https://www.npmjs.com/package/node-fetch#class-response).
+
+```shell
+npm install node-fetch@2
+```
+
+Now when you run this program, you should get a response from Courier that includes the `requestID` in the VS Code console. This indicates that the API call was made successfully and you can head over to the Courier datalog to determine if the message was sent successfully as well.
+
+Since you a are Secret Agent, you should probably protect the API key in case our code gets in the wrong hands. 
+
+20. Create a new file called `.env`
+21. Store the API Key as a variable in the .env file
+
+```
+APIKEY="fksdjfgjsdkfgndfsmn"
+```
+
+22.  Install the dotenv npm package, which will allow you to access the variable in the `index.js` file.
+23.  Once the package is installed, access the key by referring to it as `process.env.APIKEY`.
+24.  Add `require('dotenv').config()` to the top of the `index.js` file
 
 Now we can run this program to confirm that it still works the same, even after we have protected our API Key from the eyes of our enemies.
 
@@ -93,7 +239,7 @@ Since we want to define multiple channels, we can convert this into an array and
 
 Once we change the single method to all and run the program again, we can see that Courier is able to send via Twilio and Gmail within the same API call.
 
-**Chapter 3: morse code api**
+### Chapter 3: Morse Code API
 
 In this last Chapter, we can integrate the Fun Translations Morse API to encode our secret messages and send them over to the spies. On the Fun Translations website, you can search for documentation on the Morse API. Here we have access to all of the information we need to make the call - we have an endpoint and an example that demonstrates that the original message is a parameter for the endpoint.
 
@@ -118,3 +264,7 @@ After a short break interrogating one of our prisoners, we can try to run this p
 ### Conclusion
 
 Our spies are now ready to receive their secret encoded messages. Try changing the body of the content to your own secret message and send it over to courier.demos+secretmessage@gmail.com and we will send the first 5 Secret Agents to complete this task a gift! Don’t forget to submit your project to our hackathon for a chance to win XYZ. You can find the registration link in the description below.
+
+```javascript
+
+```
