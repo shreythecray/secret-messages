@@ -307,6 +307,8 @@ Courier is now able to send via Twilio and Gmail within the same API call.
 
 ### Chapter 3: Morse Code API
 
+*NOTE: The Morse API has a rate limit, which may give you an error if you run it too too many times within the hour. In this case, you will have to wait for some time before continuing.*
+
 In this last Chapter, you will integrate the Fun Translations Morse API to encode the secret messages and send them over to the spies. On the Fun Translations website, you can search for documentation on the Morse API. Here you have access to all of the information you need to make the call - you have an endpoint and an example that demonstrates that the original message is a parameter for the endpoint.
 * Fun Translations: [https://funtranslations.com/api/#morse](https://funtranslations.com/api/#morse)
 * Fun Translations API: [https://api.funtranslations.com/](https://api.funtranslations.com/)
@@ -408,8 +410,8 @@ async function send_secret_message() {
               "phone_number": process.env.PHONENUMBER
             },
             "content": {
-              "title": "new secret message",
-              "body": message
+              "title": "new subject",
+              "body": "message"
             },
             "routing": {
               "method": "all",
@@ -444,18 +446,46 @@ fetch(morse_endpoint, morse_options)
     .catch(err => console.error(err));
 ```
 
-We also know that we need to be able to access the translation from this API call in the body of the Courier API call. If we create a variable called morse_response, the entire response from this call will be saved within, allowing us to manipulate it and pass it along to the Courier API call below. Next we need to convert the JSON object into a JavaScript object so that we can read it within our code. Lastly we can get the translated message out of that object and save it in a new variable called message. We can log this variable to confirm that it works.
+You need to be able to access the translation from this API call in the body of the Courier API call.
 
-We just ran into an issue, which upon inspection can be attributed to a typo in the translation variable name.
+43. Create a variable called `morse_response`, which will hold the entire response from this call.
+44. Convert the JSON object into a JavaScript object so that you can read it within your code.
+45. Get the translated message out of that object and save it in a new variable called `message`.
+46. Log this variable to confirm that it works.
 
-The final step is to replace the message within the body of the Courier API call with the encoded message we just received. When we run this code, we are running into another error since we have reached the rate limit of the Morse API which means we have tried to use it too many times within the hour.
+```javascript
+const morse_response = await fetch(morse_endpoint, morse_options)
+    // .then(response => response.json())
+    // .then(response => console.log(response.contents.translated))
+    // .catch(err => console.error(err));
+const translation = await morse_response.json();
+const message = translation.contents.translated
+console.log(message)
+```
 
-After a short break interrogating one of our prisoners, we can try to run this program again and notice that it works. The Courier datalog shows that the messages were successfully encoded and sent via both SMS and email. Here’s what the email looks like.
+47. Replace the message within the body of the Courier API call with the encoded message you just saved in the `message` variable.
+
+```javascript
+"message": {
+    "to": {
+      "email": process.env.EMAIL,
+      "phone_number": process.env.PHONENUMBER
+    },
+    "content": {
+      "title": "new secret message",
+      "body": message
+    },
+    "routing": {
+      "method": "all",
+      "channels": ["sms", "email"]
+    },
+}
+```
+
+The Courier datalog should show that the messages were successfully encoded and sent via both SMS and email. Here’s what the email looks like:
+
+![Encoded email example](https://user-images.githubusercontent.com/28051494/186561441-db9d6b04-7865-41ff-97b7-86c59166d14d.png)
 
 ### Conclusion
 
-Our spies are now ready to receive their secret encoded messages. Try changing the body of the content to your own secret message and send it over to courier.demos+secretmessage@gmail.com and we will send the first 5 Secret Agents to complete this task a gift! Don’t forget to submit your project to our hackathon for a chance to win XYZ. You can find the registration link in the description below.
-
-```javascript
-
-```
+Our spies are now ready to receive their secret encoded messages. Try changing the body of the content to your own secret message and send it over to `courier.demos+secretmessage@gmail.com` and we will send the first 5 Secret Agents to complete this task a gift! Don’t forget to submit your project to our [hackathon](https://jkfr7wbzytt.typeform.com/courier-hacks) for a chance to win XYZ.
