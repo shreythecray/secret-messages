@@ -32,8 +32,8 @@ async function send_secret_message() {
         body: JSON.stringify({
           "message": {
             "to": {
-              "email": "courier.demos@gmail.com",
-              "phone_number": "+17742034696"
+              "email": process.env.EMAIL,
+              "phone_number": process.env.PHONENUMBER
             },
             "content": {
               "title": "new secret message",
