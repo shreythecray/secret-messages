@@ -32,27 +32,22 @@ Fun Translations API: [https://api.funtranslations.com/](https://api.funtranslat
 
 **Chapter 1: setting up**
 
-In this first Chapter, we will need to authorize our API to send the secret messages.
+**Chapter 1: Setting up**
 
-Let’s get started by integrating the Gmail and Twilio APIs, which will enable Courier to send emails and messages from a single API call.
+In this first Chapter, we will need to authorize our API to send the secret messages. Let’s get started by integrating the Gmail and Twilio APIs, which will enable Courier to send emails and messages from a single API call.
 
-First we will log into our Courier account and create a secret workspace.
+1. Log into your Courier account and create a new secret workspace.
+2. For the onboarding process, select the email channel and let Courier and build with Node.js. Start with the Gmail API since it only takes seconds to setup. All we need to do to authorization is login via Gmail. Now the API is ready to send messages.
+3. Copy the starter code, which is a basic API call using cURL, and paste it in the a new terminal. It has your API key saved already, knows which email address you want to send to, and has a message already built in.
 
-For the onboarding process, we will select the email channel and let Courier know we prefer building with Node.js. We’ll start with the Gmail API since it only takes seconds to setup and our spies don’t have time to waste. All we need to do to authorization is login via Gmail.
+Once you can see the dancing pigeon, you are ready to use Courier to send more notifications. Before we build out our application, we just need to set up the Twilio provider to enable text messages.
 
-Now the API is ready to send messages.
+3.  Head over to “Channels" in the left menu and search for Twilio. You will need an Account SID, Auth Token, and a Messaging Service SID to authorize Twilio.
+4. Open [twilio.com](http://twilio.com), login and open the Console, and find the first two tokens on that page. Save the Account SID and Auth Token in Courier.
 
-We can copy the starter code, which is a basic API call using cURL, and paste it in the a new terminal. It has our API key saved already, knows which email address we want to send to, and has a message already built in.
+You lastly just need to locate the Messaging Service SID, which can be created in the Messaging tab on the left menu. Checkout Twilio’s docs on [how to create a Messaging Service SID](https://support.twilio.com/hc/en-us/articles/223181308-Getting-started-with-Messaging-Services), linked in the description.
 
-Once we can see Agent Pigeon dancing, we know we were successful at sending our first message and are ready to use Courier to communicate with our spies.
-
-Before we build out our application, we just need to set up the Twilio provider to enable text messages.
-
-To do this we can head over to “Channels" in the left menu and search for Twilio. We need an Account SID, Auth Token, and a Messaging Service SID to authorize Twilio.
-
-When you open [twilio.com](http://twilio.com), login and open the Console and you will find the first two tokens on that page. We can save the Account SID and Auth Token in Courier. We lastly just need to locate the Messaging Service SID, which can be created in the Messaging tab on the left menu. We have already created one, and this can be found within the data related to the active numbers. Checkout Twilio’s docs on how to create a Messaging Service SID, linked in the description.
-
-Once we have all three pieces of information, we can install the provider and now our Courier account is authorized to send any email or SMS within one API call.
+Once we have all three pieces of information, you can install the provider and now your Courier account is authorized to send any email or SMS within one API call.
 
 **Chapter 2: sending messages**
 
