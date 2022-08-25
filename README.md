@@ -43,7 +43,7 @@ In this next Chapter, you will start sending messages. To actually send the secr
 
 On the right, you will see some starter code and can select a language of your choice from cURL, Node.js, Ruby, Python, Go, or PHP. 
 
-1. Select Node.js to get started.
+7. Select Node.js to get started.
 
 ```javascript
 // Dependencies to install:
