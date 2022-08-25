@@ -12,6 +12,8 @@ In Chapter 1, we will first integrate the Gmail and Twilio APIs, which Courier w
 
 We are hosting our first hackathon next month, starting September 5th until September 30th. Register now to submit this project for a chance to win some cool prizes.
 
+Register for the Hackathon: [https://jkfr7wbzytt.typeform.com/courier-hacks](https://jkfr7wbzytt.typeform.com/courier-hacks)
+
 # Instructions
 
 ### [Chapter 1: Authorize Courier to send messages using Gmail and Twilio APIs](Chapter1.md)
