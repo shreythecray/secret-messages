@@ -1,5 +1,7 @@
 # Node.js Tutorial - Sending Secret Messages with the Courier API
 
+[![Thumbnail](https://user-images.githubusercontent.com/28051494/186563254-e7a504a9-fce3-45bf-a2a0-9d1386203890.png)](https://youtu.be/6W2rIyUdmas)
+
 Welcome to the Courier Lab. In this tutorial, we will be building a Node.js app that sends multi-channel notifications in morse code.
 
 ### What’s going on?
