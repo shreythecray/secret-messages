@@ -13,8 +13,11 @@ async function send_secret_message() {
           'Content-Type': 'application/json'
         }
       };
+
+      const original_message = process.env.MESSAGE
+      const morse_endpoint = "https://api.funtranslations.com/translate/morse.json?text="+original_message
       
-      const morse_response = await fetch('https://api.funtranslations.com/translate/morse.json?text=hey%20there%20secret%20agent%20x%20this%20is%20your%20message', morse_options)
+      const morse_response = await fetch(morse_endpoint, morse_options)
         // .then(response => response.json())
         // .then(response => console.log(response.contents.translated))
         // .catch(err => console.error(err));
