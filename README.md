@@ -1,15 +1,23 @@
 # secret-messages
 ### I**ntro**
 
-- [x]  Welcome to the Courier Lab.
-- [x]  In this video, we will be building a node.js app that sends multi-channel notifications in morse code.
-- [x]  We are secret agents today and our goal is to send encoded messages to our spy network.
-- [x]  Some spies prefer reading emails and other prefer reading texts, so we need to make sure that our app can accommodate all spy preferences.
-- [x]  The first 5 Secret Agents to complete this tutorial and this task successfully will receive a gift from Courier.
-- [x]  In Chapter 1, we will first integrate the Gmail and Twilio APIs, which Courier will use to send emails and text messages.
-- [x]  In Chapter 2, we will demonstrate how to send single messages and setup routing to send multi-channel notifications.
-- [x]  In Chapter 3, we will integrate a translation API to convert our messages into Morse code.
-- [ ]  We are hosting our first hackathon next month, starting September 5th until September 30th. If you want to submit this project for a chance to win some cool prizes, the link to register is in description.
+Welcome to the Courier Lab.
+
+In this video, we will be building a node.js app that sends multi-channel notifications in morse code.
+
+We are secret agents today and our goal is to send encoded messages to our spy network.
+
+Some spies prefer reading emails and other prefer reading texts, so we need to make sure that our app can accommodate all spy preferences.
+
+The first 5 Secret Agents to complete this tutorial and this task successfully will receive a gift from Courier.
+
+In Chapter 1, we will first integrate the Gmail and Twilio APIs, which Courier will use to send emails and text messages.
+
+In Chapter 2, we will demonstrate how to send single messages and setup routing to send multi-channel notifications.
+
+In Chapter 3, we will integrate a translation API to convert our messages into Morse code.
+
+We are hosting our first hackathon next month, starting September 5th until September 30th. If you want to submit this project for a chance to win some cool prizes, the link to register is in description.
 
 ### **Body**
 
