@@ -32,11 +32,11 @@ Fun Translations API: [https://api.funtranslations.com/](https://api.funtranslat
 
 # Instructions
 
-### [Chapter 1: Authorize Courier to send messages using Gmail and Twilio APIs](../courier-send/Chapter1.md)
+### [Chapter 1: Authorize Courier to send messages using Gmail and Twilio APIs](../Chapter1.md)
 
-### [Chapter 2: Send single and multi-channel notifications](../courier-send/Chapter2.md)
+### [Chapter 2: Send single and multi-channel notifications](../Chapter2.md)
 
-### [Chapter 3: Integrate a translation API to convert messages to Morse code](../courier-send/Chapter3.md)
+### [Chapter 3: Integrate a translation API to convert messages to Morse code](../Chapter3.md)
 
 ### Conclusion
 
