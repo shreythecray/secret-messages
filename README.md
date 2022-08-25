@@ -194,7 +194,7 @@ fetch('https://api.courier.com/send', options)
 Now you can integrate this code into our own Node.js application.
 
 14. Open VS Code and open a new project with a file called `index.js`.
-15. Past the code into the `index.js` file
+15. Past the code into the `index.js` file.
 16. Install the node-fetch npm package, which will enable you to make API calls.
 17. Open a terminal and paste the command to install the package.
 
@@ -202,7 +202,7 @@ Now you can integrate this code into our own Node.js application.
 $ npm install node-fetch --save
 ```
 
-18. Run the program in terminal
+18. Run the program in terminal.
 
 ```shell
 $ node index.js
@@ -218,8 +218,8 @@ Now when you run this program, you should get a response from Courier that inclu
 
 Since you a are Secret Agent, you should probably protect the API key in case our code gets in the wrong hands. 
 
-20. Create a new file called `.env`
-21. Store the API Key as a variable in the .env file
+20. Create a new file called `.env`.
+21. Store the API Key as a variable in the .env file.
 
 ```
 APIKEY="fksdjfgjsdkfgndfsmn"
@@ -227,17 +227,83 @@ APIKEY="fksdjfgjsdkfgndfsmn"
 
 22.  Install the dotenv npm package, which will allow you to access the variable in the `index.js` file.
 23.  Once the package is installed, access the key by referring to it as `process.env.APIKEY`.
-24.  Add `require('dotenv').config()` to the top of the `index.js` file
+24.  Add `require('dotenv').config()` to the top of the `index.js` file.
+25. Run this program to confirm that it still works the same.
 
-Now we can run this program to confirm that it still works the same, even after we have protected our API Key from the eyes of our enemies.
+At this point, you can send a single message to the spies via email. However, you know that some of spies prefer to use text messages, so you will need to enable multi-channel notifications. Let’s head back to the Courier docs and scroll down to the `routing` object, which contains the `method` and `channels`. There are two types of methods available - `all` and `single`. All means is that Courier will attempt to send the message to every channel listed. Single means that Courier will attempt to send it to the first channel that works. Let’s integrate this into our program.
 
-At this point, we can send a single message to our spies via email. However, we know that some of our spies prefer to use text messages, so we will need to enable multi-channel notifications. Let’s head back to our Courier docs and scroll down to the routing object, which contains method and channels. There are two types of methods available to us - all and single. All means that Courier will attempt to send the message to every channel listed. Single means that Courier will attempt to send it to the first channel that works. Let’s integrate this into our program.
+26. Add the `routing` object anywhere within the `message` object, at the same level as `to` and `content`.
+27. Define the channels within the same `routing` object - you can choose SMS or email, in this case, since you already have an email address defined.
 
-We can add the routing object anywhere within the message object, at the same level as “to” and “content”. We will add it below content. We also need to define the channels within the same routing object - we can choose SMS or email, in this case, since we already have our email address defined.
+```javascript
+"message": {
+    "to": {
+      "email": process.env.EMAIL
+    },
+    "content": {
+      "title": "new subject",
+      "body": "message"
+    },
+    "routing": {
+      "method": "single",
+      "channels": "email"
+    },
+}
+```
 
-Since we want to define multiple channels, we can convert this into an array and list both email and SMS. We now have 2 different channels that this message can be sent to. As we know, all methods would send this message to both email and SMS. Single method would try to send this to the first that works. Since we have the user’s email address but not their phone number, we could only send it via email. If the two channels were reversed, Courier would try to send an SMS, fail to do so, and then default to sending an email. In order for the SMS channel to work, we need to add the user’s phone number. Again, we’ll use a fake number in order to protect the identities of our spies. Now this program is able to send text messages via Twilio.
+28. Convert the `channels` property into an array to define multiple channels and list both email and SMS.
 
-Once we change the single method to all and run the program again, we can see that Courier is able to send via Twilio and Gmail within the same API call.
+```javascript
+"channels": ["email", "sms"]
+```
+
+You now have 2 different channels that this message can be sent to. `all` methods would send this message to both email and SMS. `single` method would try to send this to the first that works. Since you have the user’s email address but not their phone number, this program can only send it via email.
+
+If the two channels were reversed, Courier would try to send an SMS, fail to do so, and then default to sending an email.
+
+```javascript
+"channels": ["sms", "email"]
+```
+
+29. Add the user’s phone number in order to make the SMS channel work. Now this program should be able to send text messages via Twilio.
+
+```javascript
+"message": {
+    "to": {
+      "email": process.env.EMAIL,
+      "phone_number": process.env.PHONENUMBER
+    },
+    "content": {
+      "title": "new subject",
+      "body": "message"
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["sms", "email"]
+    },
+}
+```
+
+30. Change the single method to `all` and run the program again.
+
+```javascript
+"message": {
+    "to": {
+      "email": process.env.EMAIL,
+      "phone_number": process.env.PHONENUMBER
+    },
+    "content": {
+      "title": "new subject",
+      "body": "message"
+    },
+    "routing": {
+      "method": "all",
+      "channels": ["sms", "email"]
+    },
+}
+```
+
+Courier is now able to send via Twilio and Gmail within the same API call.
 
 ### Chapter 3: Morse Code API
 
