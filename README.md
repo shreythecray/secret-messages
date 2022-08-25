@@ -28,9 +28,7 @@ Fun Translations: [https://funtranslations.com/api/#morse](https://funtranslatio
 
 Fun Translations API: [https://api.funtranslations.com/](https://api.funtranslations.com/)
 
-### **Body**
-
-**Chapter 1: setting up**
+# Instructions
 
 **Chapter 1: Setting up**
 
@@ -42,12 +40,12 @@ In this first Chapter, we will need to authorize our API to send the secret mess
 
 Once you can see the dancing pigeon, you are ready to use Courier to send more notifications. Before we build out our application, we just need to set up the Twilio provider to enable text messages.
 
-3.  Head over to “Channels" in the left menu and search for Twilio. You will need an Account SID, Auth Token, and a Messaging Service SID to authorize Twilio.
-4. Open [twilio.com](http://twilio.com), login and open the Console, and find the first two tokens on that page. Save the Account SID and Auth Token in Courier.
+4.  Head over to “Channels" in the left menu and search for Twilio. You will need an Account SID, Auth Token, and a Messaging Service SID to authorize Twilio.
+5. Open [twilio.com](http://twilio.com), login and open the Console, and find the first two tokens on that page. Save the Account SID and Auth Token in Courier.
 
 You lastly just need to locate the Messaging Service SID, which can be created in the Messaging tab on the left menu. Checkout Twilio’s docs on [how to create a Messaging Service SID](https://support.twilio.com/hc/en-us/articles/223181308-Getting-started-with-Messaging-Services), linked in the description.
 
-Once we have all three pieces of information, you can install the provider and now your Courier account is authorized to send any email or SMS within one API call.
+6. Once we have all three pieces of information, install the provider and now your Courier account is authorized to send any email or SMS within one API call.
 
 **Chapter 2: sending messages**
 
