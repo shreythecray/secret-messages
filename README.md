@@ -307,17 +307,142 @@ Courier is now able to send via Twilio and Gmail within the same API call.
 
 ### Chapter 3: Morse Code API
 
-In this last Chapter, we can integrate the Fun Translations Morse API to encode our secret messages and send them over to the spies. On the Fun Translations website, you can search for documentation on the Morse API. Here we have access to all of the information we need to make the call - we have an endpoint and an example that demonstrates that the original message is a parameter for the endpoint.
+In this last Chapter, you will integrate the Fun Translations Morse API to encode the secret messages and send them over to the spies. On the Fun Translations website, you can search for documentation on the Morse API. Here you have access to all of the information you need to make the call - you have an endpoint and an example that demonstrates that the original message is a parameter for the endpoint.
+* Fun Translations: [https://funtranslations.com/api/#morse](https://funtranslations.com/api/#morse)
+* Fun Translations API: [https://api.funtranslations.com/](https://api.funtranslations.com/)
 
-In our code, we can start by encasing the Courier API call in a function.
+31. Start by encasing the Courier API call in a function.
+32. Add a call to that function below the async function definition.
+33. Refactor `options` to `courier_options`.
 
-Before sending the message, we first need to make a call to the Morse API to translate the message. We can use node-fetch in the same way as we did for Courier to make this call. Let’s copy and edit the code to make the new API call.
+```javascript
+// Dependencies to install:
+// $ npm install node-fetch --save
 
-We can update our endpoint and refactor some of the variables such as options to morse_options for the first call and courier_options for the second one. We can remove the authorization token in the Morse API call since it does not require an API Key. This API call does not need a body so we can remove that. Lastly, we can add the message - “hey secret agent x this is your message” - as a parameter and replace all spaces in the message with its url-encode (%20).
+const fetch = require('node-fetch');
+require('dotenv').config()
 
-Let’s check to make sure this works. We can run this function and comment out the Courier API call, since we only need to test the code we just added. When we run this program, we receive an error that states that there is an error parsing the JSON. This issue is caused by an error in the documentation, which here states that it should be POST request. However, on a separate API documentation that I’ve seen before it says it is a GET request. When we update the call type to GET, it works and we can see the translated message within the response.
+async function send_secret_message() {
 
-Clearly, we don’t want to send all of this information to our spies. We only need the secret message. We can isolate the message by logging response.contents.translated.
+    const courier_options = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + process.env.APIKEY
+        },
+        body: JSON.stringify({
+          "message": {
+            "to": {
+              "email": process.env.EMAIL,
+              "phone_number": process.env.PHONENUMBER
+            },
+            "content": {
+              "title": "new subject",
+              "body": "message"
+            },
+            "routing": {
+              "method": "all",
+              "channels": ["sms", "email"]
+            },
+          }
+        })
+      };
+      
+      fetch('https://api.courier.com/send', courier_options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+
+}
+
+send_secret_message()
+```
+
+Before sending the message, you first need to make a call to the Morse API to translate the message. You can use node-fetch in the same way as you did for Courier to make this call.
+
+34. Copy the code within async function to make the new API call.
+35. Paste the code above the Courier API call.
+36. Update the endpoint to the Morse API endpoint.
+37. Refactor `options` to `morse_options` for the first call. 
+38. Remove the authorization token in the Morse API call since it does not require an API Key.
+39. Remove the `body` object.
+40. Add the message - “hey secret agent x this is your message” - as a parameter within the endpoint and replace all spaces in the message with its url-encode (%20).
+
+```javascript
+// Dependencies to install:
+// $ npm install node-fetch --save
+
+const fetch = require('node-fetch');
+require('dotenv').config()
+
+async function send_secret_message() {
+
+    const morse_options = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const original_message = "hey%20secret%20agent%20x%20this%20is%20your%20message"
+      const morse_endpoint = "https://api.funtranslations.com/translate/morse.json?text="+original_message
+      
+      fetch(morse_endpoint, morse_options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+
+    const courier_options = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + process.env.APIKEY
+        },
+        body: JSON.stringify({
+          "message": {
+            "to": {
+              "email": process.env.EMAIL,
+              "phone_number": process.env.PHONENUMBER
+            },
+            "content": {
+              "title": "new secret message",
+              "body": message
+            },
+            "routing": {
+              "method": "all",
+              "channels": ["sms", "email"]
+            },
+          }
+        })
+      };
+      
+      fetch('https://api.courier.com/send', courier_options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+
+}
+
+send_secret_message()
+```
+
+41. Comment out the Courier API call, since you only need to test the code you just added.
+
+When you run this program, we may receive an error that states that there is an error parsing the JSON. This issue is caused by an error in the documentation, which here states that it should be `POST` request. However, on a separate API documentation it is written as a `GET` request. Update the call type to `GET` and you should see the translated message within the response.
+
+Clearly, you don’t want to send all of this information to the spies. You only need the secret message.
+
+42. Isolate the message by logging `response.contents.translated`.
+
+```javascript
+fetch(morse_endpoint, morse_options)
+    .then(response => response.json())
+    .then(response => console.log(response.contents.translated))
+    .catch(err => console.error(err));
+```
 
 We also know that we need to be able to access the translation from this API call in the body of the Courier API call. If we create a variable called morse_response, the entire response from this call will be saved within, allowing us to manipulate it and pass it along to the Courier API call below. Next we need to convert the JSON object into a JavaScript object so that we can read it within our code. Lastly we can get the translated message out of that object and save it in a new variable called message. We can log this variable to confirm that it works.
 
