@@ -24,7 +24,7 @@ Register for the Hackathon: [https://jkfr7wbzytt.typeform.com/courier-hacks](htt
 
 In this first Chapter, we will need to authorize our API to send the secret messages. Let’s get started by integrating the Gmail and Twilio APIs, which will enable Courier to send emails and messages from a single API call.
 
-1. Log into your Courier account and create a new secret workspace: https://bit.ly/3QPiFg3
+1. [Log into your Courier account](https://bit.ly/3QPiFg3) and create a new secret workspace
 2. For the onboarding process, select the email channel and let Courier and build with Node.js. Start with the Gmail API since it only takes seconds to setup. All we need to do to authorization is login via Gmail. Now the API is ready to send messages.
 3. Copy the starter code, which is a basic API call using cURL, and paste it in the a new terminal. It has your API key saved already, knows which email address you want to send to, and has a message already built in.
 
