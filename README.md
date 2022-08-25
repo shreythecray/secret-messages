@@ -1,23 +1,16 @@
 # secret-messages
-### I**ntro**
 
-Welcome to the Courier Lab.
+Welcome to the Courier Lab. In this tutorial, we will be building a Node.js app that sends multi-channel notifications in morse code.
 
-In this video, we will be building a node.js app that sends multi-channel notifications in morse code.
+**What’s going on?**
 
-We are secret agents today and our goal is to send encoded messages to our spy network.
+We are secret agents today and our goal is to send encoded messages to our spy network. Some spies prefer reading emails and other prefer reading texts, so we need to make sure that our app can accommodate all spy preferences.
 
-Some spies prefer reading emails and other prefer reading texts, so we need to make sure that our app can accommodate all spy preferences.
+**Note:** the first 5 Secret Agents to complete this tutorial and this task successfully will receive a gift from Courier.
 
-The first 5 Secret Agents to complete this tutorial and this task successfully will receive a gift from Courier.
+In Chapter 1, we will first integrate the Gmail and Twilio APIs, which Courier will use to send emails and text messages. In Chapter 2, we will demonstrate how to send single messages and setup routing to send multi-channel notifications. In Chapter 3, we will integrate a translation API to convert our messages into Morse code.
 
-In Chapter 1, we will first integrate the Gmail and Twilio APIs, which Courier will use to send emails and text messages.
-
-In Chapter 2, we will demonstrate how to send single messages and setup routing to send multi-channel notifications.
-
-In Chapter 3, we will integrate a translation API to convert our messages into Morse code.
-
-We are hosting our first hackathon next month, starting September 5th until September 30th. If you want to submit this project for a chance to win some cool prizes, the link to register is in description.
+We are hosting our first hackathon next month, starting September 5th until September 30th. Register now to submit this project for a chance to win some cool prizes.
 
 ### **Body**
 
