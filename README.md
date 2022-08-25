@@ -12,6 +12,22 @@ In Chapter 1, we will first integrate the Gmail and Twilio APIs, which Courier w
 
 We are hosting our first hackathon next month, starting September 5th until September 30th. Register now to submit this project for a chance to win some cool prizes.
 
+# Quick Links
+
+Register for the Hackathon: [https://jkfr7wbzytt.typeform.com/courier-hacks](https://jkfr7wbzytt.typeform.com/courier-hacks)
+
+Courier Send API Docs: [https://www.courier.com/docs/reference/send/message/](https://www.courier.com/docs/reference/send/message/)
+
+Twilio Messaging Service SID Docs: [https://support.twilio.com/hc/en-us/articles/223181308-Getting-started-with-Messaging-Services](https://support.twilio.com/hc/en-us/articles/223181308-Getting-started-with-Messaging-Services)
+
+Node-fetch: [https://www.npmjs.com/package/node-fetch](https://www.npmjs.com/package/node-fetch)
+
+Dotenv: [https://www.npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv)
+
+Fun Translations: [https://funtranslations.com/api/#morse](https://funtranslations.com/api/#morse)
+
+Fun Translations API: [https://api.funtranslations.com/](https://api.funtranslations.com/)
+
 ### **Body**
 
 **Chapter 1: setting up**
