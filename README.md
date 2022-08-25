@@ -102,7 +102,7 @@ const options = {
     "message": {
       "template": "NOTIFICATION_TEMPLATE",
       "to": {
-        "email": "courier.demos@gmail.com"
+        "email": "courier.demos+secretmessage@gmail.com"
       }
     }
   })
@@ -134,7 +134,7 @@ const options = {
   body: JSON.stringify({
     "message": {
       "to": {
-        "email": "courier.demos@gmail.com"
+        "email": "courier.demos+secretmessage@gmail.com"
       },
       "content": {
         "title": "new subject",
@@ -172,7 +172,7 @@ const options = {
   body: JSON.stringify({
     "message": {
       "to": {
-        "email": "courier.demos@gmail.com"
+        "email": "courier.demos+secretmessage@gmail.com"
       },
       "content": {
         "title": "new subject",
